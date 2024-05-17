@@ -1,0 +1,5 @@
+Landing Page básica de um site fictício utilizando HTML e CSS, com pouco toque na responsividade do site.
+
+Autor: Izael Araújo
+GitHub: izael.dev
+Instagra: izael.dev
