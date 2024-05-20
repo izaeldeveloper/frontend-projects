@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>POKEDEX Izael</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            body{
+                background-color: #1c3863;
+            }
+
+            .main{
+                margin: 5px auto;
+                max-width: 1100px;
+                background-color: #1c1b1b;
+                padding: 30px 2%;
+                border-left: 10px solid gray;
+                border-radius: 15px;
+            }
+
+            .main h2{
+                text-align: center;
+                color: #d9c13d;
+                font-size: 45px;
+            }
+
+            .pokemon-boxes{
+                display: flex;
+                margin: 20px 0;
+                flex-wrap: wrap;
+            }
+
+            .pokemon-box{
+                width: 29%;
+                margin: 20px 2%;
+                background-color: gray;
+                border: 2px solid aqua;
+                border-radius: 15px;
+            }
+
+            .pokemon-box img{
+                width: 100%;
+            }
+
+            .pokemon-box p{
+                background-color: #1c1b1b; 
+                color:#d9c13d;
+                font-size: 21px;
+                text-align: center;
+                padding: 5px 0;
+                border-radius: 14PX;
+            }
+
+            input{
+                border-radius: 10px;
+                text-align: center;
+                font-weight: bold;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            footer{
+                text-align: center;
+                padding: 20px 0;
+                background-color: #1c1b1b;
+                color:#d9c13d;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
+
+            @media screen and (max-width:768px){
+                .pokemon-box{width: 100%;text-align: center;}
+                .pokemon-box img{
+                    max-width: 300px;
+                 }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <h2>POKE<b style="color:aqua">DEX</b></h2>
+            <br />
+            <input id="quantidade" style="width: 100%;height:40px;padding-left: 10px;" type="text" name="quantidade" placeholder="Insira a quantidade de pokemóns...">
+            <div class="pokemon-boxes">
+
+            </div>
+        </div>
+
+        <footer>
+            Exemplo de POKEDEX feito por <b style="color:aqua;">@mn_iza66</b>.
+        </footer>
+        
+        <script>
+            /*
+            var quantidade = document.getElementById('quantidade');
+            quantidade.addEventListener('keyup',()=>{
+                pegaPokemons(quantidade.value);
+            })
+
+            pegaPokemons(2);
+                function pegaPokemons(quantidade){
+                    fetch('https://pokeapi.co/api/v2/pokemon?limit='+quantidade).then(response => response.json()).then(allpokemon => {
+
+                        var pokemons = [];
+
+                        allpokemon.results.map((val)=>{
+
+                            fetch(val.url).then(response => response.json()).then(pokemonSingle => {
+                                pokemons.push({nome:val.name,imagem:pokemonSingle.sprites.front_default});
+                    
+                                if(pokemons.length == quantidade){
+                                    var pokemonBoxes = document.querySelector('.pokemon-boxes').
+                                    pokemonBoxes.innerHTML = "";
+
+                                    pokemons.map(function(val){
+
+                                        pokemonBoxes.innerHTML+=`<div class="pokemon-box">
+                                                                    <img src="`+val.imagem+`" />
+                                                                    <p>`+val.nome+`</p>
+                                                                </div>`;
+                                    })
+                                }
+            
+                            })
+                        })
+                    })
+
+                }
+                */
+                
+                var quantidade = document.getElementById('quantidade');
+             quantidade.addEventListener('keyup',()=>{
+                pegaPokemons(quantidade.value);
+             })
+            pegaPokemons(0);
+            function pegaPokemons(quantidade){
+                fetch('https://pokeapi.co/api/v2/pokemon?limit='+quantidade)
+                .then(response => response.json())
+                .then(allpokemon => {
+
+                    var pokemons = [];
+
+                    allpokemon.results.map((val)=>{
+                        
+                        fetch(val.url)
+                        .then(response => response.json())
+                        .then(pokemonSingle => {
+                            pokemons.push({nome:val.name,imagem:pokemonSingle.sprites.front_default});
+                            
+
+                            if(pokemons.length == quantidade){
+                                //Finalizamos nossas requisições.
+
+                                
+                                var pokemonBoxes = document.querySelector('.pokemon-boxes');
+                                pokemonBoxes.innerHTML = "";
+
+                               // console.log(pokemons);
+                                pokemons.map(function(val){
+                                pokemonBoxes.innerHTML+=`
+                                
+                <div class="pokemon-box">
+                    <img src="`+val.imagem+`" />
+                    <p>`+val.nome+`</p>
+                </div>          
+                                `;
+                
+                                })
+
+
+
+
+                            }
+
+                        })
+
+
+
+                    })
+
+                
+                })
+            }
+        </script>
+    </body>
+</html>

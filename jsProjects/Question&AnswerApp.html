@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Perguntas e Respostas</title>
+        <style>
+            *{
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="title">
+            <h1>Qual a raiz quadra de 49?</h1>
+        </div>
+
+        <form class="pergunta">
+            <div class="resposta">
+                <span>Opção 1</span>
+                <input type="radio" name="pergunta1" value="correta" />
+                <br/>
+            </div>
+            <div class="resposta">
+                <span>Opção 2</span>
+                <input type="radio" name="pergunta1" value="incorreta" />
+                <br/>
+            </div>
+            <div class="resposta">
+                <span>Opção 3</span>
+                <input type="radio" name="pergunta1" value="incorreta" />
+                <br/>
+            </div>
+        </form>
+
+        <script>
+            var elementos = document.querySelectorAll('[type=radio]');
+
+            for(var i = 0; i < elementos.length; i++){
+                elementos[i].addEventListener('change',function(e){
+                    let marcado = e.target.value;
+                    if(marcado == "correta"){
+
+                       let parentNode = e.target.parentNode;
+                       parentNode.style.backgroundColor = 'green';
+
+                       let els = parentNode.parentNode.querySelectorAll('[type=radio]');
+
+                       for(var n = 0; n < els.length; n++){
+                        els[n].disabled = true;
+                       }
+
+                    }else if(marcado == "incorreta"){
+
+                            let parentNode = e.target.parentNode;
+                            parentNode.style.backgroundColor = 'red';
+
+                            let els = parentNode.parentNode.querySelectorAll('[type=radio]');
+
+                            for(var n = 0; n < els.length; n++){
+                            els[n].disabled = true;
+                            }
+                        
+                            let correto = parentNode.parentNode.querySelector('[value=correta]');
+                            correto.parentNode.style.backgroundColor = 'green';
+                    }
+                    })
+    
+            }
+        </script>
+    </body>
+</html>

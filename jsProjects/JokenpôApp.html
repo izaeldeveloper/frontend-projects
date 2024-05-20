@@ -1,0 +1,189 @@
+<html>
+    <body>
+        <style>
+            .player-options img,.enemy-options img{
+            max-width: 200px;
+            opacity: 0.3;
+            cursor: pointer;
+            
+            }
+
+            .player-options,.enemy-options{
+                width: 50%;
+                text-align: center;
+            }
+
+            .center{
+                display: flex;
+            }
+            
+            body{
+                background-color: rgb(24, 20, 20);
+            }
+
+            h1{
+                color: greenyellow;
+                font-weight: bold;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                padding-bottom: 10px;
+            }
+            
+            h2{
+                font-family: tahoma;
+                color: white;
+                font-weight: bold;
+                border-bottom: 1px solid greenyellow;
+                padding-bottom: 10px;
+            }
+
+            hr{
+                background-color: black;
+            }
+
+            footer{
+                color: greenyellow;
+                font-style: normal;
+                font-size: 19px;
+                text-align: center;
+                font-family: tahoma;
+                border-top: 1px solid greenyellow;
+                padding: 20px 0;
+            }
+        </style>
+
+        <h1 style="text-align: center;border-bottom: 1px solid greenyellow;">Pedra, papel ou tesoura!</h1>
+
+        
+        <h2 style="text-align: center;" class="vencedor"></h2>
+        
+
+        <div class="center">
+        <div class="player-options">
+            <div><img opt="rock" src="images/pedra.png" /></div>
+            <div><img opt="paper" src="images/papel.png" /></div>
+            <div><img opt="scisor" src="images/tesoura.png" /></div>
+        </div>
+
+        <div class="enemy-options">
+            <div><img opt="rock" src="images/pedra.png" /></div>
+            <div><img opt="paper" src="images/papel.png" /></div>
+            <div><img opt="scisor" src="images/tesoura.png" /></div>
+        </div>
+        </div>
+
+        <footer>
+            Jogo feito por @mn_iza66.
+        </footer>
+
+        <script>
+            var elementos = document.querySelectorAll('.player-options div > img');
+            var playerOpt = "";
+            var inimigoOpt = "";
+
+            
+
+            function validarVitoria(){
+
+                let vencedor = document.querySelector('.vencedor');
+                 
+                if(playerOpt == "paper"){
+
+                    if(inimigoOpt == "paper"){
+                      
+                        vencedor.innerHTML = "O jogo foi empatado!";
+                    }else if(inimigoOpt == "scisor"){
+                       
+                        vencedor.innerHTML = "O inimigo ganhou!";
+                    }else if(inimigoOpt == "rock"){
+                      
+                        vencedor.innerHTML = "Você ganhou!";
+                    }
+
+
+                }
+
+
+                if(playerOpt == "scisor"){
+
+                    if(inimigoOpt == "paper"){
+                        
+                        vencedor.innerHTML = "Você ganhou!";
+                    }else if(inimigoOpt == "scisor"){
+                      
+                        vencedor.innerHTML = "O jogo foi empatado!";
+                    }else if(inimigoOpt == "rock"){
+                    
+                        vencedor.innerHTML = "O inimigo ganhou!";
+                    }
+
+
+                }
+
+                if(playerOpt == "rock"){
+
+                if(inimigoOpt == "paper"){
+                 
+                    vencedor.innerHTML = "O inimigo ganhou!";
+                }else if(inimigoOpt == "scisor"){
+               
+                    vencedor.innerHTML = "Você ganhou!";
+                }else if(inimigoOpt == "rock"){
+                
+                    vencedor.innerHTML = "O jogo foi empatado!";
+                    
+                }
+
+
+                }
+            }
+
+
+            function resetInimigo(){
+                const enemyOptions = document.querySelectorAll('.enemy-options div');
+                for(var i = 0; i < enemyOptions.length; i++){
+                        enemyOptions[i].childNodes[0].style.opacity = 0.3;
+                }
+            }
+
+            function inimigoJogar(){
+                let rand = Math.floor(Math.random()*3);
+
+                const enemyOptions = document.querySelectorAll('.enemy-options div');
+
+                resetInimigo();
+
+                for(var i = 0; i < enemyOptions.length; i++){
+                    if(i == rand){
+                        enemyOptions[i].childNodes[0].style.opacity = 1;
+                        inimigoOpt =  enemyOptions[i].childNodes[0].getAttribute('opt');
+                    }
+                }
+
+                validarVitoria();
+            }
+
+           
+
+            
+
+
+            function resetOpacityPlayer(){
+                for(var i = 0; i < elementos.length; i++){
+                    elementos[i].style.opacity = 0.3;
+                };
+            }
+
+            for(var i = 0; i < elementos.length; i++){
+                elementos[i].addEventListener('click',function(t){
+                    resetOpacityPlayer();
+                    t.target.style.opacity = 1;
+                    playerOpt = t.target.getAttribute('opt');
+
+                    inimigoJogar();
+                });
+            }
+
+            
+        </script>
+    </body>
+</html>
