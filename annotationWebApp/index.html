@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>App de Anotações - Curso FrontEnd WebMaster</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            html,body{
+                height: 100%;
+                background-color: blueviolet;
+            }
+
+            .btn-add{
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                cursor: pointer;
+                background: white;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                color: blueviolet;
+                font-size: 40px;
+                font-weight: bold;
+                line-height: 50px;
+                text-align: center;
+            }
+
+            .container-anotacoes{
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 0 2%;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .anotacao-single{
+                width: 33.3%;
+                padding: 10px;
+            }
+
+            .anotacao-single textarea{
+                width: 100%;
+                height: 140px;
+                padding: 10px;
+                background-color: rgb(246, 248, 94);
+            }
+
+            @media screen and (max-width: 768px){
+                .anotacao-single{
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-anotacoes">
+            
+        </div>
+        <div class="btn-add"><b>+</b></div>
+        <script src="jquery.js"></script>
+        <script>
+            $(function(){
+                $('.btn-add').click(function(){
+                    var el = `
+                    <div class="anotacao-single">
+                        <textarea placeholder="Sua nova anotação..."></textarea>
+                    </div>
+                    `;
+                    $('.container-anotacoes').append(el);
+
+                    var textArea = $('.anotacao-single').last().find('textarea');
+
+                    var date = new Date();
+
+                    var hh = date.getHours();
+                    var mm = date.getMinutes();
+
+                    var finalTime = hh+":"+mm;
+                    
+                    textArea.html("Nova anotação em:"+finalTime);
+                })
+            })
+        </script>
+    </body>
+</html>
